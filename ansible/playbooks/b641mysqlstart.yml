@@ -1,0 +1,8 @@
+- hosts: tgroup2
+  tasks:
+
+    - name: start mysql
+      service:
+          name: mysql
+          state: started
+

@@ -1,0 +1,13 @@
+# tasks file for dnsmasq
+    - name: dnsmasq install 
+      apt: 
+        name: dnsmasq
+    - name: stop default resolved 
+      service:
+        name: systemd-resolved
+        enabled: no
+        state: stopped
+    - name: restart service
+      ansible.builtin.service:
+        name: dnsmasq
+        state: restarted

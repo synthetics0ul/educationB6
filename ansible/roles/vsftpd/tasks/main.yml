@@ -1,0 +1,11 @@
+    - name: vsftpd install
+      apt:
+        name: vsftpd
+    - name: set config
+      copy:
+        src: /etc/ansible/roles/vsftpd/files/vsftpd.conf
+        dest: /etc/vsftpd.conf
+    - name: restart service
+      ansible.builtin.service:
+        name: vsftpd
+        state: restarted

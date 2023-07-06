@@ -1,0 +1,23 @@
+- hosts: tgroup
+  tasks:
+    - name: user2 create
+      ansible.builtin.user:
+        name: user2
+        comment:  B6.9.2
+        uid: 1667
+        group: sudo
+        createhome: yes
+        home: /home/user2
+    - name: user2 create
+      ansible.builtin.user:
+        name: user3
+        comment:  B6.9.2
+        uid: 1668
+        group: sudo
+        createhome: yes
+        home: /home/user3
+    - name: Add a lines to sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        line: user3 ALL=(ALL) NOPASSWD:EXEC:ALL
+        line: user2 ALL=(ALL) NOPASSWD:EXEC:ALL

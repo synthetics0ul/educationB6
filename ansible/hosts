@@ -1,0 +1,12 @@
+[tgroup]
+tgroup_instance_1 ansible_host=10.51.9.82
+[tgroup2]
+tgroup2_instance_1 ansible_host=10.51.9.81
+[tgroup:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+[tgroup2:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3

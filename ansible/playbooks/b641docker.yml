@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+    - name: Add Docker’s official GPG key
+      shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+    - name:  set up the repository
+      shell: "add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable'"   
+    - name: apt update
+      apt: 
+        update_cache: yes
+    - name: docker install 
+      apt: 
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+    - name: start docker
+      service:
+          name: docker
+          state: started

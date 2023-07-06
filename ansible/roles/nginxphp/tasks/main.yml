@@ -1,0 +1,26 @@
+    - name: nginx install 
+      apt: 
+        name: nginx
+    - name: php-fpm install
+      apt:
+        name: php-fpm 
+    - name: set nginx config
+      copy:
+        src: /etc/ansible/roles/nginxphp/files/phptest.conf
+        dest: /etc/nginx/conf.d/phptest.conf
+    - name: set php config
+      copy:
+        src: /etc/ansible/roles/nginxphp/files/www.conf
+        dest: /etc/php/7.4/fpm/pool.d/www.conf
+    - name: directory for task create 
+      ansible.builtin.file:
+        path: /opt/nginx/ansible
+        state: directory
+        mode: 0755
+        owner: www-data
+        group: www-data
+    - name: set php config
+      copy:
+        src: /etc/ansible/roles/nginxphp/files/index.php
+        dest: /opt/nginx/ansible/index.php
+ 

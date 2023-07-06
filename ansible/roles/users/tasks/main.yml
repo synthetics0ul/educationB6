@@ -1,0 +1,24 @@
+    - name: newuser create
+      ansible.builtin.user:
+        name: newuser
+        comment:  HW-03
+        uid: 1670
+        group: sudo
+        createhome: yes
+        home: /home/newuser
+    - name: Add a lines to sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        line: newuser ALL=(ALL) NOPASSWD:EXEC:ALL
+    - name: ssh directory create 
+      ansible.builtin.file:
+        path: /home/newuser/.ssh
+        state: directory
+        mode: 0700
+        owner: newuser
+        group: sudo
+    - name: copy pubkey
+      copy:
+        src: /etc/ansible/roles/users/files/id_rsa.pub
+        dest: /home/newuser/.ssh/authorized_keys
+

@@ -1,0 +1,12 @@
+    - name: php-fpm install
+      apt:
+        name: php-fpm 
+    - name: set php config
+      copy:
+        src: /etc/ansible/roles/php/files/www.conf
+        dest: /etc/php/7.4/fpm/pool.d/www.conf
+    - name: restart service
+      ansible.builtin.service:
+        name: php7.4-fpm
+        state: restarted
+

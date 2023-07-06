@@ -1,0 +1,5 @@
+- hosts: tgroup
+  gather_facts: no
+  become: yes
+  roles:
+   - vsftpd

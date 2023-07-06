@@ -1,0 +1,12 @@
+    - name: nginx install 
+      apt: 
+        name: nginx
+    - name: set nginx config
+      copy:
+        src: /etc/ansible/roles/http/files/phptest.conf
+        dest: /etc/nginx/conf.d/phptest.conf
+    - name: set php config
+      copy:
+        src: /etc/ansible/roles/http/files/index.php
+        dest: /opt/nginx/ansible/index.php
+

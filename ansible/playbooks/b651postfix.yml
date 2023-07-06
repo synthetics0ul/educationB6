@@ -1,0 +1,32 @@
+- hosts: all
+  tasks:
+    - name: user create
+      ansible.builtin.user:
+        name: user1
+        comment: Testuser
+        uid: 1666
+        group: sudo
+        createhome: yes
+        home: /home/user1 
+    - name: ssh directory create 
+      ansible.builtin.file:
+        path: /home/user1/.ssh
+        state: directory
+        mode: 0700
+        owner: user1
+        group: sudo
+    - name: copy key
+      copy:
+        src: /etc/ansible/id_rsa.pub
+        dest: /home/user1/.ssh/authorized_keys
+    - name: postfix install 
+      apt: 
+        name: postfix
+      tags:
+        - postfix init
+    - name: postfix remove
+      apt:
+        name: postfix
+        state: absent
+      tags:
+        - postfix drop
